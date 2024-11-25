@@ -1,7 +1,5 @@
 import os
-import time
-
-from selene import browser, have, be, by
+from selene import browser, have, by
 from confest import browser_management
 
 first_name, last_name = "Ivan", "Ivanov"
@@ -14,7 +12,7 @@ current_address = "st. Nicolson, 15"
 state = "NCR"
 city = "Gurgaon"
 
-image_path = os.path.abspath('../qa_guru_hw5/images/hubba_bubba.png')
+image_path = os.path.abspath("../images/hubba_bubba.png")
 hobbies_elements = ("[for='hobbies-checkbox-1']", "[for='hobbies-checkbox-2']", "[for='hobbies-checkbox-3']")
 
 expected_result = [
@@ -25,10 +23,27 @@ expected_result = [
     'Date of Birth', f"{birth_day} {birth_month},{birth_year}",
     'Subjects', ', '.join(map(str, subjects)),
     'Hobbies', 'Sports, Reading, Music',
-    # 'Picture', '',
+    'Picture', 'hubba_bubba.png',
     'Address', current_address,
     'State and City', f"{state} {city}"
 ]
+
+
+def select_subjects():
+    for subject in subjects:
+        browser.element("#subjectsInput").type(subject).press_enter()
+
+
+def select_hobbies():
+    for element in hobbies_elements:
+        browser.element(element).click()
+
+
+def select_date_of_birthday():
+    browser.element("#dateOfBirthInput").click()
+    browser.element("[class='react-datepicker__month-select']").click().element(by.text(birth_month)).click()
+    browser.element("[class='react-datepicker__year-select']").click().element(by.text(birth_year)).click()
+    browser.element("[class='react-datepicker__month']").element(by.text(birth_day)).click()
 
 
 def test_registration_datepicker_birth(browser_management):
@@ -43,20 +58,11 @@ def test_registration_datepicker_birth(browser_management):
     browser.element("#genterWrapper").element(by.text(gender)).click()
     browser.element("#userNumber").type(phone_number)
 
-    browser.element("#dateOfBirthInput").click()
-    browser.element("[class='react-datepicker__month-select']").click().element(by.text(birth_month)).click()
-    browser.element("[class='react-datepicker__year-select']").click().element(by.text(birth_year)).click()
-    browser.element("[class='react-datepicker__month']").element(by.text(birth_day)).click()
+    select_date_of_birthday()
+    select_subjects()
+    select_hobbies()
 
-    for subject in subjects:
-        browser.element("#subjectsInput").type(subject).press_enter()
-
-    for hobbies_element in hobbies_elements:
-        browser.element(hobbies_element).click()
-
-    # browser.element('#uploadPicture').send_keys(image_path)
-    # browser.element('[for="uploadPicture"]').send_keys(image_path)
-    # browser.element('[id="uploadPicture"]').set_value(image_path)
+    browser.element("#uploadPicture").send_keys(image_path)
 
     browser.element("#currentAddress").type(current_address)
 
