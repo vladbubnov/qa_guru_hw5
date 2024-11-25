@@ -25,7 +25,7 @@ expected_result = [
     'Date of Birth', f"{birth_day} {birth_month},{birth_year}",
     'Subjects', ', '.join(map(str, subjects)),
     'Hobbies', 'Sports, Reading, Music',
-    # 'Picture', 'qfile.png',
+    # 'Picture', '',
     'Address', current_address,
     'State and City', f"{state} {city}"
 ]
