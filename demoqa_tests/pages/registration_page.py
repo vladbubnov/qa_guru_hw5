@@ -1,6 +1,8 @@
 from selene import browser, by, have
 from selenium.webdriver import Keys
 
+from demoqa_tests.data.users import Hobbies
+
 
 class RegistrationPage:
 
@@ -40,6 +42,7 @@ class RegistrationPage:
     def fill_hobbies(self, values):
         for value in values:
             browser.element(by.text(value)).click()
+
 
     def fill_picture(self, image_path):
         browser.element("#uploadPicture").send_keys(image_path)
