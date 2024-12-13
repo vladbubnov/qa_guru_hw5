@@ -4,7 +4,6 @@ from selene import browser
 
 from confest import browser_management
 from demoqa_tests.data import users
-from demoqa_tests.data.users import User
 from demoqa_tests.pages.registration_page import RegistrationPage
 
 image_path = os.path.abspath("../images/hubba_bubba.png")

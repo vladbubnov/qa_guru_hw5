@@ -1,8 +1,6 @@
 from selene import browser, by, have
 from selenium.webdriver import Keys
 
-from demoqa_tests.data.users import Hobbies
-
 
 class RegistrationPage:
 
@@ -74,5 +72,3 @@ class RegistrationPage:
             f"{state} {city}"
         )
         )
-
-
