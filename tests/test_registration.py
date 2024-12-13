@@ -16,16 +16,11 @@ def test_registration_datepicker_birth(browser_management):
     browser.open("/automation-practice-form")
     registration_page.clear_bunner()
 
-    registration_page.registration_fill_birthday(users.student, image_path)
-
-    registration_page.should_registered_user_with(users.student.first_name, users.student.last_name,
-                                                  users.student.email, users.student.gender,
-                                                  users.student.phone_number, users.student.birth_year,
-                                                  users.student.birth_month,
-                                                  users.student.birth_day, users.student.subjects,
-                                                  users.student.hobbies, users.student.picture,
-                                                  users.student.current_address, users.student.state,
-                                                  users.student.city)
+    registration_page.registration_fill_birthday(student, image_path)
+    registration_page.should_registered_user_with(student.first_name, student.last_name, student.email, student.gender,
+                                                  student.phone_number, student.birth_year, student.birth_month,
+                                                  student.birth_day, student.subjects, student.hobbies, student.picture,
+                                                  student.current_address, student.state, student.city)
 
 
 def test_registration_manual_birth(browser_management):
@@ -36,12 +31,7 @@ def test_registration_manual_birth(browser_management):
     registration_page.clear_bunner()
 
     registration_page.registration_type_birthday(users.student, image_path)
-
-    registration_page.should_registered_user_with(users.student.first_name, users.student.last_name,
-                                                  users.student.email, users.student.gender,
-                                                  users.student.phone_number, users.student.birth_year,
-                                                  users.student.birth_month,
-                                                  users.student.birth_day, users.student.subjects,
-                                                  users.student.hobbies, users.student.picture,
-                                                  users.student.current_address, users.student.state,
-                                                  users.student.city)
+    registration_page.should_registered_user_with(student.first_name, student.last_name, student.email, student.gender,
+                                                  student.phone_number, student.birth_year, student.birth_month,
+                                                  student.birth_day, student.subjects, student.hobbies, student.picture,
+                                                  student.current_address, student.state, student.city)

@@ -87,22 +87,3 @@ student = User(
     City.gurgaon.value,
     "hubba_bubba.png"
 )
-
-
-student = User(
-    "Ivan",
-    "Ivanov",
-    "testemail@test.com",
-    "Male",
-    "9999999999",
-    "1995",
-    "February",
-    "21",
-    "21 Feb 1995",
-    ("Arts", "Biology"),
-    ("Sports", "Reading", "Music"),
-    "st. Nicolson, 15",
-    "NCR",
-    "Gurgaon",
-    "hubba_bubba.png"
-)
