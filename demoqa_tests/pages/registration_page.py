@@ -1,6 +1,8 @@
 from selene import browser, by, have
 from selenium.webdriver import Keys
 
+from demoqa_tests.data.users import Student
+
 
 class RegistrationPage:
 
@@ -71,5 +73,11 @@ class RegistrationPage:
             f"{state} {city}"
         )
         )
+
+    def registration(self, student: Student):
+         self.fill_first_name(student.first_name)
+         self.fill_last_name(student.last_name)
+         self.fill_email(student.email)
+         self.fill_gender(student.gender)
 
 

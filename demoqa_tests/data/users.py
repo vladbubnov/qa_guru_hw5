@@ -1,4 +1,3 @@
-
 class Student:
     def __init__(self, first_name, last_name, email, gender, phone_number, birth_year, birth_month, birth_day,
                  date_birthday, subjects, hobbies, current_address, state, city, picture):
@@ -17,3 +16,22 @@ class Student:
         self.state = state
         self.city = city
         self.picture = picture
+
+
+student = Student(
+    "Ivan",
+    "Ivanov",
+    "testemail@test.com",
+    "Male",
+    "9999999999",
+    "1995",
+    "February",
+    "21",
+    "21 Feb 1995",
+    ("Arts", "Biology"),
+    ("Sports", "Reading", "Music"),
+    "st. Nicolson, 15",
+    "NCR",
+    "Gurgaon",
+    "hubba_bubba.png"
+)
