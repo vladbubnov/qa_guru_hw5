@@ -11,6 +11,7 @@ image_path = os.path.abspath("../images/hubba_bubba.png")
 
 def test_registration_datepicker_birth(browser_management):
     registration_page = RegistrationPage()
+    student = users.student
 
     browser.open("/automation-practice-form")
     registration_page.clear_bunner()
@@ -29,6 +30,7 @@ def test_registration_datepicker_birth(browser_management):
 
 def test_registration_manual_birth(browser_management):
     registration_page = RegistrationPage()
+    student = users.student
 
     browser.open("/automation-practice-form")
     registration_page.clear_bunner()

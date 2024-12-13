@@ -1,22 +1,92 @@
+import dataclasses
+import random
+from enum import Enum
 
+from faker import Faker
+
+faker = Faker("ru_RU")
+
+
+@dataclasses.dataclass
 class User:
-    def __init__(self, first_name, last_name, email, gender, phone_number, birth_year, birth_month, birth_day,
-                 date_birthday, subjects, hobbies, current_address, state, city, picture):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.gender = gender
-        self.phone_number = phone_number
-        self.birth_year = birth_year
-        self.birth_month = birth_month
-        self.birth_day = birth_day
-        self.date_birthday = date_birthday
-        self.subjects = subjects
-        self.hobbies = hobbies
-        self.current_address = current_address
-        self.state = state
-        self.city = city
-        self.picture = picture
+    first_name: str
+    last_name: str
+    email: str
+    gender: str
+    phone_number: str
+    birth_year: str
+    birth_month: str
+    birth_day: str
+    date_birthday: str
+    subjects: list[str]
+    hobbies: list[str]
+    current_address: str
+    state: str
+    city: str
+    picture: any
+
+
+class Gender(Enum):
+    male = "Male"
+    female = "Female"
+    other = "Other"
+
+
+class Hobbies(Enum):
+    sports = "Sports"
+    reading = "Reading"
+    music = "Music"
+
+
+class Subjects(Enum):
+    arts = "Arts"
+    biology = "Biology"
+    hindi = "Hindi"
+    english = "English"
+    math = "Math"
+
+
+class State(Enum):
+    ncr = "NCR"
+    uttar_pradesh = "Uttar Pradesh"
+    haryana = "Haryana"
+    rajasthan = "Rajasthan"
+
+
+class City(Enum):
+    #NCR
+    delhi = "Delhi"
+    gurgaon = "Gurgaon"
+    noida = "Noida"
+    #Uttar Pradesh
+    agra = "Agra"
+    lucknow = "Lucknow"
+    merrut = "Merrut"
+    #Haryana
+    karnal = "Karnal"
+    panipat = "Panipat"
+    #Rajasthan
+    jaipur = "Jaipur"
+    jaiselmer = "Jaiselmer"
+
+
+student = User(
+    faker.first_name(),
+    faker.last_name(),
+    faker.email(),
+    Gender.male.value,
+    str(random.randint(1000000000, 9999999999)),
+    "1995",
+    "February",
+    "21",
+    "21 Feb 1995",
+    [Subjects.biology.value, Subjects.arts.value],
+    [Hobbies.music.value, Hobbies.sports.value, Hobbies.reading.value],
+    faker.address(),
+    State.ncr.value,
+    City.gurgaon.value,
+    "hubba_bubba.png"
+)
 
 
 student = User(
