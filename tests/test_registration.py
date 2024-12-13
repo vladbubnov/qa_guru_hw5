@@ -1,105 +1,95 @@
 import os
 
-from selene import browser, have, by
-from selenium.webdriver import Keys
+from selene import browser
 
 from confest import browser_management
-
-first_name, last_name = "Ivan", "Ivanov"
-email = "testemail@test.com"
-gender = "Male"
-phone_number = "9999999999"
-birth_month, birth_year, birth_day = "February", "1995", "21"
-date_birthday = "21 Feb 1995"
-subjects = ("Arts", "Biology")
-hobbies = ("Sports", "Reading", "Music")
-current_address = "st. Nicolson, 15"
-state = "NCR"
-city = "Gurgaon"
+from demoqa_tests.data.users import Student
+from demoqa_tests.pages.registration_page import RegistrationPage
 
 image_path = os.path.abspath("../images/hubba_bubba.png")
 
-expected_result = [
-    'Student Name', f"{first_name} {last_name}",
-    'Student Email', email,
-    'Gender', gender,
-    'Mobile', phone_number,
-    'Date of Birth', f"{birth_day} {birth_month},{birth_year}",
-    'Subjects', ', '.join(map(str, subjects)),
-    'Hobbies', 'Sports, Reading, Music',
-    'Picture', 'hubba_bubba.png',
-    'Address', current_address,
-    'State and City', f"{state} {city}"
-]
-
-
-def clear_bunner():
-    browser.driver.execute_script("$('#fixedban').remove()")
-    browser.driver.execute_script("$('footer').remove()")
-
-
-def select_subjects(values):
-    for value in values:
-        browser.element("#subjectsInput").type(value).press_enter()
-
-
-def select_hobbies(values):
-    for value in values:
-        browser.element(by.text(value)).click()
-
-
-def select_date_of_birthday(day, month, year):
-    browser.element("#dateOfBirthInput").click()
-    browser.element("[class='react-datepicker__month-select']").click().element(by.text(month)).click()
-    browser.element("[class='react-datepicker__year-select']").click().element(by.text(year)).click()
-    browser.element("[class='react-datepicker__month']").element(by.text(day)).click()
-
-
-def set_date_of_birthday(date):
-    browser.element("#dateOfBirthInput").send_keys(f"{Keys.END}{Keys.SHIFT}{Keys.HOME}").type(date)
-    browser.element("#subjects-label").click()
-
-
-def check_result(result):
-    for i in range(0, len(result), 2):
-        browser.element('.modal-body').should(have.text(result[i])).should(have.text(result[i + 1]))
-
 
 def test_registration_datepicker_birth(browser_management):
-    browser.open("/")
-    clear_bunner()
+    registration_page = RegistrationPage()
+    student = Student(
+        "Ivan",
+        "Ivanov",
+        "testemail@test.com",
+        "Male",
+        "9999999999",
+        "1995",
+        "February",
+        "21",
+        "21 Feb 1995",
+        ("Arts", "Biology"),
+        ("Sports", "Reading", "Music"),
+        "st. Nicolson, 15",
+        "NCR",
+        "Gurgaon",
+        "hubba_bubba.png"
+    )
 
-    browser.element("#firstName").type(first_name)
-    browser.element("#lastName").type(last_name)
-    browser.element("#userEmail").type(email)
-    browser.element("#genterWrapper").element(by.text(gender)).click()
-    browser.element("#userNumber").type(phone_number)
-    select_date_of_birthday(birth_day, birth_month, birth_year)
-    select_subjects(subjects)
-    select_hobbies(hobbies)
-    browser.element("#uploadPicture").send_keys(image_path)
-    browser.element("#currentAddress").type(current_address)
-    browser.element("#state").click().element(by.text(state)).click()
-    browser.element("#city").click().element(by.text(city)).click()
-    browser.element("#submit").click()
-    check_result(expected_result)
+    browser.open("/automation-practice-form")
+    registration_page.clear_bunner()
+
+    registration_page.fill_first_name(student.first_name)
+    registration_page.fill_last_name(student.last_name)
+    registration_page.fill_email(student.email)
+    registration_page.fill_gender(student.gender)
+    registration_page.fill_mobile(student.phone_number)
+    registration_page.fill_date_of_birth(student.birth_year, student.birth_month, student.birth_day)
+    registration_page.fill_subjects(student.subjects)
+    registration_page.fill_hobbies(student.hobbies)
+    registration_page.fill_picture(image_path)
+    registration_page.fill_current_address(student.current_address)
+    registration_page.fill_state(student.state)
+    registration_page.fill_city(student.city)
+    registration_page.click_submit()
+
+    registration_page.should_registered_user_with(student.first_name, student.last_name, student.email, student.gender,
+                                                  student.phone_number, student.birth_year, student.birth_month,
+                                                  student.birth_day, student.subjects, student.hobbies, student.picture,
+                                                  student.current_address, student.state, student.city)
 
 
 def test_registration_manual_birth(browser_management):
-    browser.open("/")
-    clear_bunner()
+    registration_page = RegistrationPage()
+    student = Student(
+        "Ivan",
+        "Ivanov",
+        "testemail@test.com",
+        "Male",
+        "9999999999",
+        "1995",
+        "February",
+        "21",
+        "21 Feb 1995",
+        ("Arts", "Biology"),
+        ("Sports", "Reading", "Music"),
+        "st. Nicolson, 15",
+        "NCR",
+        "Gurgaon",
+        "hubba_bubba.png"
+    )
 
-    browser.element("#firstName").type(first_name)
-    browser.element("#lastName").type(last_name)
-    browser.element("#userEmail").type(email)
-    browser.element("#genterWrapper").element(by.text(gender)).click()
-    browser.element("#userNumber").type(phone_number)
-    set_date_of_birthday(date_birthday)
-    select_subjects(subjects)
-    select_hobbies(hobbies)
-    browser.element("#uploadPicture").send_keys(image_path)
-    browser.element("#currentAddress").type(current_address)
-    browser.element("#state").click().element(by.text(state)).click()
-    browser.element("#city").click().element(by.text(city)).click()
-    browser.element("#submit").click()
-    check_result(expected_result)
+    browser.open("/automation-practice-form")
+    registration_page.clear_bunner()
+
+    registration_page.fill_first_name(student.first_name)
+    registration_page.fill_last_name(student.last_name)
+    registration_page.fill_email(student.email)
+    registration_page.fill_gender(student.gender)
+    registration_page.fill_mobile(student.phone_number)
+    registration_page.type_date_of_birth(student.date_birthday)
+    registration_page.fill_subjects(student.subjects)
+    registration_page.fill_hobbies(student.hobbies)
+    registration_page.fill_picture(image_path)
+    registration_page.fill_current_address(student.current_address)
+    registration_page.fill_state(student.state)
+    registration_page.fill_city(student.city)
+    registration_page.click_submit()
+
+    registration_page.should_registered_user_with(student.first_name, student.last_name, student.email, student.gender,
+                                                  student.phone_number, student.birth_year, student.birth_month,
+                                                  student.birth_day, student.subjects, student.hobbies, student.picture,
+                                                  student.current_address, student.state, student.city)
