@@ -1,4 +1,5 @@
-class Student:
+
+class User:
     def __init__(self, first_name, last_name, email, gender, phone_number, birth_year, birth_month, birth_day,
                  date_birthday, subjects, hobbies, current_address, state, city, picture):
         self.first_name = first_name

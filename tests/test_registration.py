@@ -3,7 +3,7 @@ import os
 from selene import browser
 
 from confest import browser_management
-from demoqa_tests.data.users import Student
+from demoqa_tests.data.users import User
 from demoqa_tests.pages.registration_page import RegistrationPage
 
 image_path = os.path.abspath("../images/hubba_bubba.png")
@@ -11,7 +11,7 @@ image_path = os.path.abspath("../images/hubba_bubba.png")
 
 def test_registration_datepicker_birth(browser_management):
     registration_page = RegistrationPage()
-    student = Student(
+    student = User(
         "Ivan",
         "Ivanov",
         "testemail@test.com",
@@ -54,7 +54,7 @@ def test_registration_datepicker_birth(browser_management):
 
 def test_registration_manual_birth(browser_management):
     registration_page = RegistrationPage()
-    student = Student(
+    student = User(
         "Ivan",
         "Ivanov",
         "testemail@test.com",
