@@ -1,7 +1,7 @@
 from selene import browser, by, have
 from selenium.webdriver import Keys
 
-from demoqa_tests.data.users import Student
+from demoqa_tests.data.users import User
 
 
 class RegistrationPage:
@@ -74,10 +74,33 @@ class RegistrationPage:
         )
         )
 
-    def registration(self, student: Student):
+    def registration_fill_birthday(self, student: User, image_path):
          self.fill_first_name(student.first_name)
          self.fill_last_name(student.last_name)
          self.fill_email(student.email)
          self.fill_gender(student.gender)
+         self.fill_mobile(student.phone_number)
+         self.fill_date_of_birth(student.birth_year, student.birth_month, student.birth_day)
+         self.fill_subjects(student.subjects)
+         self.fill_hobbies(student.hobbies)
+         self.fill_picture(image_path)
+         self.fill_current_address(student.current_address)
+         self.fill_state(student.state)
+         self.fill_city(student.city)
+         self.click_submit()
 
+    def registration_type_birthday(self, student: User, image_path):
+         self.fill_first_name(student.first_name)
+         self.fill_last_name(student.last_name)
+         self.fill_email(student.email)
+         self.fill_gender(student.gender)
+         self.fill_mobile(student.phone_number)
+         self.type_date_of_birth(student.date_birthday)
+         self.fill_subjects(student.subjects)
+         self.fill_hobbies(student.hobbies)
+         self.fill_picture(image_path)
+         self.fill_current_address(student.current_address)
+         self.fill_state(student.state)
+         self.fill_city(student.city)
+         self.click_submit()
 

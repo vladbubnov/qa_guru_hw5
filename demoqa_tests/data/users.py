@@ -19,7 +19,7 @@ class User:
         self.picture = picture
 
 
-student = Student(
+student = User(
     "Ivan",
     "Ivanov",
     "testemail@test.com",
