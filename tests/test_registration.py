@@ -6,7 +6,7 @@ from confest import browser_management
 from demoqa_tests.data import users
 from demoqa_tests.pages.registration_page import RegistrationPage
 
-image_path = os.path.abspath("../images/hubba_bubba.png")
+image_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../images/hubba_bubba.png"))
 
 
 def test_registration_datepicker_birth(browser_management):
