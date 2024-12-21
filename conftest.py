@@ -5,24 +5,23 @@ from selenium.webdriver.chrome.options import Options
 
 from utils import attach
 
+DEFAULT_BROWSER_NAME = "CHROME"
 DEFAULT_BROWSER_VERSION = "100.0"
 
 
 def pytest_addoption(parser):
-    parser.addoption(
-        "--browser_version",
-        help="Версия браузера в котором будут запущены тесты",
-        default="100.0"
-    )
+    parser.addoption("--browser_name")
+    parser.addoption("--browser_version")
 
 
 @pytest.fixture(scope='function')
 def browser_management(request):
+    browser_name = request.config.getoption('browser_name') or DEFAULT_BROWSER_NAME
     browser_version = request.config.getoption('browser_version') or DEFAULT_BROWSER_VERSION
 
     options = Options()
     selenoid_capabilities = {
-        "browserName": "chrome",
+        "browserName": browser_name,
         "browserVersion": browser_version,
         "selenoid:options": {
             "enableVNC": True,
