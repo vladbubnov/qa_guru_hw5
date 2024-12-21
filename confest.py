@@ -10,7 +10,8 @@ def pytest_addoption(parser):
     parser.addoption(
         "--browser_version",
         help="Версия браузера в котором будут запущены тесты",
-        choices="")
+        default="100.0"
+    )
 
 
 @pytest.fixture(scope='function', autouse=True)
