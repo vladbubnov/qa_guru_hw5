@@ -80,6 +80,7 @@ def test_registration_datepicker_birth(browser_management):
 @allure.description("Тест проверяет ввода данных в инпуты")
 @allure.link("https://demoqa.com/", name="Testing")
 def test_registration_manual_birth(browser_management):
+    browser = browser_management
     registration_page = RegistrationPage()
     student = users.student
 
