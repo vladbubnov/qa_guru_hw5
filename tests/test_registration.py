@@ -22,9 +22,6 @@ def test_registration_datepicker_birth(browser_management):
     with allure.step("Открываем страницу регистрации"):
         browser.open("/automation-practice-form")
 
-    with allure.step("Удаляем баннеры"):
-        registration_page.clear_bunner()
-
     with allure.step("Вводим имя пользователя"):
         registration_page.fill_first_name(student.first_name)
 
@@ -42,6 +39,9 @@ def test_registration_datepicker_birth(browser_management):
 
     with allure.step("Выбираем дату рождения пользователя"):
         registration_page.fill_date_of_birth(student.birth_year, student.birth_month, student.birth_day)
+
+    with allure.step("Удаляем баннеры"):
+        registration_page.clear_bunner()
 
     with allure.step("Вводим объекты пользователя"):
         registration_page.fill_subjects(student.subjects)
@@ -87,9 +87,6 @@ def test_registration_manual_birth(browser_management):
     with allure.step("Открываем страницу регистрации"):
         browser.open("/automation-practice-form")
 
-    with allure.step("Удаляем баннеры"):
-        registration_page.clear_bunner()
-
     with allure.step("Вводим имя пользователя"):
         registration_page.fill_first_name(student.first_name)
 
@@ -107,6 +104,9 @@ def test_registration_manual_birth(browser_management):
 
     with allure.step("Вводим дату рождения пользователя"):
         registration_page.type_date_of_birth(student.date_birthday)
+
+    with allure.step("Удаляем баннеры"):
+        registration_page.clear_bunner()
 
     with allure.step("Вводим объекты пользователя"):
         registration_page.fill_subjects(student.subjects)

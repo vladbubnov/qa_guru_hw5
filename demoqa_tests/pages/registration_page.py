@@ -1,10 +1,14 @@
 from selene import browser, by, have
 from selenium.webdriver import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class RegistrationPage:
 
     def clear_bunner(self):
+        # Удаление баннера и футера
         browser.driver.execute_script("$('#fixedban').remove()")
         browser.driver.execute_script("$('footer').remove()")
 
