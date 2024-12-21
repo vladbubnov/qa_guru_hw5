@@ -1,9 +1,7 @@
 import os
 
 import allure
-from selene import browser
-
-from confest import browser_management
+from conftest import browser_management
 from demoqa_tests.data import users
 from demoqa_tests.pages.registration_page import RegistrationPage
 
@@ -18,6 +16,7 @@ image_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../images/
 @allure.description("Тест проверяет ввода данных в инпуты")
 @allure.link("https://demoqa.com/", name="Testing")
 def test_registration_datepicker_birth(browser_management):
+    browser = browser_management
     registration_page = RegistrationPage()
     student = users.student
     with allure.step("Открываем страницу регистрации"):
